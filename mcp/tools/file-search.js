@@ -4,7 +4,7 @@ import { askLLM } from "../llm.js";
 
 export const schema = {
   name: "file_search",
-  description: "Search files in a directory and use local LLM to judge relevance. Returns files ranked by relevance to your criteria.",
+  description: "Semantic file search — find files by meaning, not just name. Scans a directory, reads file previews, and uses a local model to rank results by relevance to your natural-language criteria.",
   inputSchema: {
     type: "object",
     properties: {

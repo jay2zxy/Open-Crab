@@ -1,9 +1,10 @@
 {
   "mcpServers": {
     "open-crab-llm": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "mcp/server.js"
+        "-y",
+        "open-crab"
       ],
       "env": {
         "LLM_BASE_URL": "http://localhost:11434/v1",

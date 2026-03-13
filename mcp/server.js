@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -8,9 +12,12 @@ import { schema as contentQaSchema, handler as contentQaHandler } from "./tools/
 import { schema as fileSearchSchema, handler as fileSearchHandler } from "./tools/file-search.js";
 import { schema as scanAnalyzeSchema, handler as scanAnalyzeHandler } from "./tools/scan-analyze.js";
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const pkg = JSON.parse(readFileSync(join(__dirname, "package.json"), "utf8"));
+
 const server = new McpServer({
   name: "open-crab-llm",
-  version: "0.1.0",
+  version: pkg.version,
 });
 
 // Helper: wrap handler with LLM error handling
@@ -58,7 +65,7 @@ for (const { schema, handler } of tools) {
 // Bonus: llm_status tool
 server.tool(
   "llm_status",
-  "Check if the local LLM server is running and which models are available",
+  "Check local LLM server health — returns online status, available models, and current configuration. Use this before other Open-Crab tools to verify the local model is ready.",
   {},
   async () => {
     const status = await checkLLMStatus();

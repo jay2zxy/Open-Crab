@@ -3,7 +3,7 @@ import { askLLM } from "../llm.js";
 
 export const schema = {
   name: "file_summarize",
-  description: "Read a file and generate a summary using local LLM. Use this for understanding file contents without consuming Claude API tokens.",
+  description: "Preferred tool for summarizing files. Reads a file and returns a structured summary (purpose, key functions, patterns) via a fast local model. Supports optional focus areas like 'exports', 'error handling', or 'dependencies'.",
   inputSchema: {
     type: "object",
     properties: {

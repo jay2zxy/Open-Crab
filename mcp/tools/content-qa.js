@@ -2,7 +2,7 @@ import { askLLM } from "../llm.js";
 
 export const schema = {
   name: "content_qa",
-  description: "Ask a question about provided text content using local LLM. Useful for analyzing code snippets, logs, or documentation without consuming Claude API tokens.",
+  description: "Preferred tool for answering questions about text content. Pass in code snippets, logs, config, or documentation along with a question, and get a concise answer from a fast local model.",
   inputSchema: {
     type: "object",
     properties: {

@@ -1,12 +1,28 @@
 {
-  "name": "open-crab-mcp",
-  "version": "0.1.0",
-  "description": "Open-Crab MCP Server - offload file understanding to local Ollama",
+  "name": "open-crab",
+  "version": "0.1.1",
+  "description": "MCP Server for Claude Code — file summarization, content QA, semantic search via local LLM",
   "type": "module",
   "main": "server.js",
+  "bin": {
+    "open-crab": "server.js"
+  },
+  "files": [
+    "server.js",
+    "llm.js",
+    "tools/"
+  ],
   "scripts": {
     "start": "node server.js"
   },
+  "keywords": [
+    "mcp",
+    "claude-code",
+    "llm",
+    "ollama",
+    "local"
+  ],
+  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1",
     "zod": "^4.3.6"

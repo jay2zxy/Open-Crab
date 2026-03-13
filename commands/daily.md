@@ -11,10 +11,19 @@
 
 ## 记录
 
-执行完毕后，将本次结果追加到 插件根目录下的 `scan_log.md`，格式：
+执行完毕后，将本次结果追加到 `~/.claude/scan_log.md`，格式：
 ```
 ## YYYY-MM-DD
 - **安全**: ✅/⚠️ 摘要
 ```
 - 如果当天已有记录则覆盖，避免重复
-- 先读取 scan_log.md 查看历史，如果上次有 ⚠️ 项，对比本次是否已修复
+
+## 缓存检查
+
+- 检查 npm cache 大小（`npm cache ls 2>/dev/null | wc -l` 或查看 cache 目录大小）
+- 如果超过 500MB，提醒用户可用 `npm cache clean --force` 清理
+
+## 历史对比
+
+- 如果 MCP 工具 `scan_log_analyze` 可用，用它分析上次 ⚠️ 项是否已修复（query: "上次未解决的警告项"）
+- 如果 MCP 不可用，直接读取 scan_log.md 查看历史对比
