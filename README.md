@@ -47,6 +47,8 @@ Claude Code ←─stdio─→ MCP Server ←─HTTP─→ Local LLM (e.g. Ollama
 
 ## Install
 
+### Commands only (no MCP)
+
 ```
 /install Open-Crab
 ```
@@ -57,29 +59,51 @@ Or clone manually:
 git clone https://github.com/jay2zxy/Open-Crab.git ~/.claude/plugins/Open-Crab
 ```
 
+Commands work immediately — no extra setup needed.
+
+### Commands + MCP Tools
+
+1. Install a local LLM backend (pick one):
+   - [Ollama](https://ollama.com) (recommended) — `ollama pull qwen3:8b`
+   - [LM Studio](https://lmstudio.ai) — download a model, start server
+   - Any OpenAI-compatible server (llama.cpp, vLLM, etc.)
+
+2. Install MCP dependencies:
+
+```bash
+cd ~/.claude/plugins/Open-Crab/mcp && npm install
+```
+
+3. Test the connection:
+
+```bash
+node mcp/llm.js
+```
+
+4. If not using Ollama defaults, edit `.mcp.json` in the plugin root:
+
+```json
+{
+  "env": {
+    "LLM_BASE_URL": "http://localhost:1234/v1",
+    "LLM_MODEL": "your-model-name"
+  }
+}
+```
+
 ## Requirements
 
 - Claude Code CLI
 - Works on Windows / macOS / Linux
-- (Optional) Local LLM server for MCP tools — install [Ollama](https://ollama.com) or any OpenAI-compatible server
+- (Optional) Node.js + local LLM server for MCP tools
 
-### MCP Setup
-
-MCP tools work out of the box if Ollama is running on default port. To customize:
-
-Edit `.mcp.json` environment variables:
+### MCP Configuration
 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `LLM_BASE_URL` | `http://localhost:11434/v1` | OpenAI-compatible API endpoint |
 | `LLM_MODEL` | `qwen3:8b` | Model to use |
 | `LLM_API_KEY` | `no-key` | API key (if required) |
-
-Then install MCP dependencies:
-
-```bash
-cd mcp && npm install
-```
 
 ## Customization
 

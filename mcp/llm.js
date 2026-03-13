@@ -58,3 +58,17 @@ export async function checkLLMStatus() {
     return { online: false, error: `Cannot reach ${LLM_BASE_URL}` };
   }
 }
+
+// Run directly: node llm.js
+if (process.argv[1] && process.argv[1].endsWith("llm.js")) {
+  checkLLMStatus().then((s) => {
+    if (s.online) {
+      console.log(`OK - ${s.baseUrl}`);
+      console.log(`Models: ${s.models.join(", ")}`);
+      console.log(`Default: ${s.defaultModel}`);
+    } else {
+      console.error(`FAIL - ${s.error}`);
+      process.exit(1);
+    }
+  });
+}

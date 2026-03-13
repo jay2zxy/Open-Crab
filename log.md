@@ -17,7 +17,8 @@
 
 ### 决策记录
 - **ollama.js → llm.js**：不绑死 Ollama，改用 OpenAI 兼容 API（`/v1/chat/completions`），支持 Ollama / LM Studio / llama.cpp 等后端，只需改 `LLM_BASE_URL` 环境变量
-- **项目位置**：MCP 集成到现有插件 `C:\Users\del\Desktop\Work\Open-Crab`，不单独建项目
+- **项目位置**：MCP 集成到现有插件，不单独建项目
+- **plan 位置**：从 `~/.claude/plans/` 搬到项目内 `plan.md`
 
 ### 问题记录
 （暂无）
