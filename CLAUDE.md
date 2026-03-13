@@ -13,9 +13,9 @@
 
 ### 进行中
 - MCP Server 开发：通过本地 LLM（OpenAI 兼容 API）处理文件理解，省 API 费用
-  - 后端可换：Ollama / LM Studio / llama.cpp / vLLM 等
-  - 已完成：llm.js 封装 + 4 个工具 + server.js
-  - 待做：npm install + 测试验证
+  - 已完成：llm.js + 5 个工具 + server.js，全部测试通过
+  - 待做：Commands 集成
+  - 详细计划：`plan.md`
 
 ### 分支
 - `master` — 稳定版
