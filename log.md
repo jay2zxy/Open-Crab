@@ -1,6 +1,6 @@
 # Open-Crab 开发日志
 
-## 2026-03-12 MCP Server 初始化
+## 2026-03-13 MCP Server 初始化 (`9ad94ab`)
 
 ### 进度
 - [x] 创建目录结构 `mcp/`, `mcp/tools/`
