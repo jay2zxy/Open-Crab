@@ -14,6 +14,8 @@
 ### 进行中
 - MCP Server 开发：通过本地 LLM（OpenAI 兼容 API）处理文件理解，省 API 费用
   - 已完成：llm.js + 5 个工具 + server.js，全部测试通过
+  - 已完成：工具 description 优化（引导 Claude 优先选用）
+  - 待做：npm 发布（npx 分发，用户零安装）
   - 待做：Commands 集成
   - 详细计划：`plan.md`
 
@@ -52,3 +54,5 @@ Open-Crab/
 - `llm.js` 统一封装 LLM 调用，其他文件不直接发 HTTP 请求
 - LLM 后端通过环境变量配置：`LLM_BASE_URL`、`LLM_MODEL`、`LLM_API_KEY`（可选）
 - LLM 离线时工具返回友好错误，不能让 MCP Server 崩溃
+- MCP 分发通过 npm + npx，不依赖用户手动 npm install
+- 工具 description 要从用户视角写，强调独特能力，不写"省 API 费用"

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -58,7 +59,7 @@ for (const { schema, handler } of tools) {
 // Bonus: llm_status tool
 server.tool(
   "llm_status",
-  "Check if the local LLM server is running and which models are available",
+  "Check local LLM server health — returns online status, available models, and current configuration. Use this before other Open-Crab tools to verify the local model is ready.",
   {},
   async () => {
     const status = await checkLLMStatus();

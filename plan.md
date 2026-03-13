@@ -68,10 +68,17 @@ Open-Crab/
 2. 错误处理（LLM 离线时友好提示）
 3. 全部 5 个工具 stdio 测试通过
 
-### 第三阶段：Commands 集成 ⬜
+### 第三阶段：npm 发布 + npx 分发 ✅
+1. `package.json` 加 `bin` 字段指向 `server.js` ✅
+2. `server.js` 顶部加 `#!/usr/bin/env node` ✅
+3. `npm publish` 发布到 npm（包名 `open-crab`）✅
+4. `.mcp.json` 改为 npx 调用：`"command": "npx", "args": ["-y", "open-crab"]` ✅
+5. 验证：npx 冒烟测试 ✅（initialize + tools/list 正常）
+
+### 第四阶段：Commands 集成 ⬜
 1. 修改 commands 引导 Claude 使用 MCP 工具处理文件理解任务
 
-### 第四阶段：优化（可选）⬜
+### 第五阶段：优化（可选）⬜
 1. prompt 缓存（相同文件+问题不重复调 LLM）
 2. 模型选择逻辑（简单任务用小模型）
 
@@ -81,4 +88,5 @@ Open-Crab/
 
 ## 验证方式
 1. stdio 测试：`printf JSON | node mcp/server.js`（已通过）
-2. 插件集成测试：Claude Code 加载插件后调用 MCP 工具（待验证）
+2. 插件集成测试：Claude Code 加载插件后调用 MCP 工具（已通过，5/5 工具正常）
+3. npx 分发测试：`npx -y open-crab` ✅

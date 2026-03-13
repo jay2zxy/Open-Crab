@@ -3,7 +3,7 @@ import { askLLM } from "../llm.js";
 
 export const schema = {
   name: "scan_log_analyze",
-  description: "Analyze scan_log.md trends and patterns using local LLM. Useful for understanding project health over time.",
+  description: "Analyze scan_log.md for trends, recurring issues, and project health changes over time. Uses a local model to interpret patrol log history and surface actionable insights.",
   inputSchema: {
     type: "object",
     properties: {
