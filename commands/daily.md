@@ -11,12 +11,17 @@
 
 ## 记录
 
-执行完毕后，将本次结果追加到 插件根目录下的 `scan_log.md`，格式：
+执行完毕后，将本次结果追加到 `~/.claude/scan_log.md`，格式：
 ```
 ## YYYY-MM-DD
 - **安全**: ✅/⚠️ 摘要
 ```
 - 如果当天已有记录则覆盖，避免重复
+
+## 缓存检查
+
+- 检查 npm cache 大小（`npm cache ls 2>/dev/null | wc -l` 或查看 cache 目录大小）
+- 如果超过 500MB，提醒用户可用 `npm cache clean --force` 清理
 
 ## 历史对比
 

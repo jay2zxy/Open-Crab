@@ -75,8 +75,10 @@ Open-Crab/
 4. `.mcp.json` 改为 npx 调用：`"command": "npx", "args": ["-y", "open-crab"]` ✅
 5. 验证：npx 冒烟测试 ✅（initialize + tools/list 正常）
 
-### 第四阶段：Commands 集成 ⬜
-1. 修改 commands 引导 Claude 使用 MCP 工具处理文件理解任务
+### 第四阶段：Commands 集成 ✅
+1. daily.md、evolve.md 集成 MCP 工具（优先使用，不可用时回退）
+2. scan_log.md 路径统一为 `~/.claude/scan_log.md`
+3. disk-clean、security 为纯系统命令，无需集成
 
 ### 第五阶段：优化（可选）⬜
 1. prompt 缓存（相同文件+问题不重复调 LLM）

@@ -2,57 +2,37 @@
 
 自维护系统工具插件 for Claude Code。
 
-## 项目状态
-
-### 已完成
-- 插件基础架构（plugin.json + 4 个 commands）
-- commands 通用化（去掉硬编码路径，适配跨平台）
-- 全部 commands 测试通过（security、disk-clean、daily、evolve）
-- GitHub 仓库：https://github.com/jay2zxy/Open-Crab
-- 已提交到 Anthropic 官方 marketplace 审核（通过表单提交）
-
-### 进行中
-- MCP Server 开发：通过本地 LLM（OpenAI 兼容 API）处理文件理解，省 API 费用
-  - 已完成：llm.js + 5 个工具 + server.js，全部测试通过
-  - 已完成：工具 description 优化（引导 Claude 优先选用）
-  - 待做：npm 发布（npx 分发，用户零安装）
-  - 待做：Commands 集成
-  - 详细计划：`plan.md`
-
-### 分支
-- `master` — 稳定版
-- `jay-dev` — 开发分支（主要在这里工作）
-
 ## 架构
 
 ```
 Open-Crab/
 ├── .claude-plugin/plugin.json   # 插件元信息
-├── .mcp.json                    # MCP Server 配置
+├── .mcp.json                    # MCP Server 配置（npx open-crab）
 ├── commands/                    # slash commands
 │   ├── daily.md                 # 巡检调度器
 │   ├── disk-clean.md            # 当前目录清理
 │   ├── security.md              # 安全扫描
 │   └── evolve.md                # 插件自维护
-├── mcp/                         # MCP Server
-│   ├── package.json             # 依赖
-│   ├── server.js                # 主入口，注册工具
-│   ├── llm.js                   # OpenAI 兼容 LLM 客户端
-│   └── tools/
-│       ├── file-summarize.js    # 文件摘要
-│       ├── content-qa.js        # 内容问答
-│       ├── file-search.js       # 文件搜索+相关性
-│       └── scan-analyze.js      # scan_log 分析
-├── log.md                       # 开发日志/进度追踪
-└── scan_log.md                  # 巡检日志（gitignored）
+└── mcp/                         # MCP Server（发布为 npm: open-crab）
+    ├── server.js                # 主入口，注册工具
+    ├── llm.js                   # OpenAI 兼容 LLM 客户端
+    └── tools/                   # 5 个工具
 ```
+
+## MCP 工具使用规则
+
+当 open-crab-llm MCP 工具可用时，优先使用本地 LLM 处理以下场景：
+- **理解文件内容** → 用 `file_summarize` 而非直接读取全文
+- **对文本/代码/日志提问** → 用 `content_qa` 而非自行分析
+- **查找相关文件** → 用 `file_search` 做语义搜索，再用内置工具精确定位
+- **分析巡检日志** → 用 `scan_log_analyze`
+
+例外情况，回退到内置工具（Read/Grep/Glob）：
+- MCP 工具不可用或返回错误时
+- 用户明确要求"你来分析"、"用 Claude 看"等指令时
 
 ## 注意事项
 - commands 里不要写死用户路径，保持通用
-- scan_log.md 是用户本地数据，已 gitignore
-- 本地开发用 jay-dev 分支，master 只接受合并
-- `llm.js` 统一封装 LLM 调用，其他文件不直接发 HTTP 请求
+- scan_log.md 统一存放在 `~/.claude/scan_log.md`，是用户本地数据
 - LLM 后端通过环境变量配置：`LLM_BASE_URL`、`LLM_MODEL`、`LLM_API_KEY`（可选）
 - LLM 离线时工具返回友好错误，不能让 MCP Server 崩溃
-- MCP 分发通过 npm + npx，不依赖用户手动 npm install
-- 工具 description 要从用户视角写，强调独特能力，不写"省 API 费用"

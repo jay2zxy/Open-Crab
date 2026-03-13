@@ -31,7 +31,9 @@
 - [x] npx 冒烟测试通过（initialize + tools/list）
 - [x] npm token 轮换（旧 token 暴露后撤销，重新登录）
 - [x] npm 发布 `open-crab@0.1.1`（手动终端发布，CLI 内 OTP 链接被掩码）
-- [ ] Commands 集成（引导 Claude 使用 MCP 工具）
+- [x] Commands 集成：daily、evolve 优先使用 MCP 工具，不可用时回退
+- [x] server.js 版本号改为动态读取 package.json
+- [x] CLAUDE.md 项目状态更新
 
 ### 决策记录
 - **工具 description 优化**：去掉"省 API 费用"的开发者视角，改为强调工具独特能力（如语义搜索）和 "Preferred tool" 引导词，让 Claude 有明确理由选用
