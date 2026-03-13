@@ -1,27 +1,24 @@
-# 全局进化：Commands + 规则 + 知识库 + 记忆
+# 插件自维护
+
+审查并修复本插件自身的 commands，保持健康运转。
 
 ## 执行步骤
 
-### 阶段一：Commands 审查
-1. 列出 `~/.claude/commands/` 下所有 .md 文件（排除本文件）
+### 阶段一：Commands 自检
+1. 定位本插件目录，列出 `commands/` 下所有 .md 文件（排除本文件）
 2. 为每个 command **派 Agent 并行审查**：
    - 步骤是否清晰、无冗余，超 50 行则精简
-   - 快速验证关键路径/命令是否仍有效
+   - 检测当前系统（Windows/macOS/Linux），标记不兼容的步骤
    - 需要改就直接改，不需要改就跳过
 
-### 阶段二：知识反哺 + 规则提升
-3. 读取 log.md + lessons.md，检查：
-   - 新知识能否改进现有 commands
-   - lessons.md 中反复出现的教训 → 提升为 CLAUDE.md 全局规则
-   - 已在 CLAUDE.md 中硬编码的教训 → lessons.md 中标记 `→ 已提升为规则`
+### 阶段二：执行反馈
+3. 读取 插件根目录下的 `scan_log.md`，检查：
+   - 某个 command 是否连续报错或报警
+   - 报错原因能否通过修改 command 修复
+   - 上次 ⚠️ 项是否已解决
 
-### 阶段三：知识库治理
-4. 扫描 log.md + lessons.md：
-   - 合并重复/高度相似的条目，确保日期升序
-   - log.md 超 50 条 → 早期条目移入 `~/.claude/log-archive.md`
-   - lessons.md 已解决的 → 标记 `~~已解决~~`
-
-5. 输出变更摘要
+### 阶段三：输出
+4. 输出变更摘要表格（command / 行数 / 状态 / 说明）
 
 ## 原则
 - 每个 command 文件 ≤ 50 行
